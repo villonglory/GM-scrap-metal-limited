@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | GM Scrapmetal Limited</title>
+  <!-- Keep this page out of Google -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1B2028">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+  <!-- Shown for a moment while the saved login is checked -->
+  <div id="boot-view" class="boot" role="status">
+    <span class="spinner spinner-dark" aria-hidden="true"></span>
+    <span class="sr-only">Loading…</span>
+  </div>
+
+  <!-- =================================================================
+       LOGIN
+       ================================================================= -->
+  <main id="login-view" class="auth" hidden>
+    <div class="auth-brand">
+      <img src="images/stock/scrap-yard-hero.jpg" alt="" class="auth-bg">
+      <div class="auth-brand-inner">
+        <a href="index.html"><img src="images/logo.png" alt="GM Scrapmetal Limited" class="auth-logo" width="1533" height="628"></a>
+        <p class="auth-tagline">Website administration</p>
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <a href="index.html" class="auth-logo-mobile"><img src="images/logo.png" alt="GM Scrapmetal Limited" width="1533" height="628"></a>
+
+      <!-- Sign in -->
+      <section id="signin-box" class="auth-box">
+        <p class="eyebrow">Staff only</p>
+        <h1>Sign in</h1>
+        <p class="auth-muted">Sign in to manage the gallery, enquiries and website settings.</p>
+
+        <div id="not-configured" class="notice notice-warn" hidden>
+          <strong>Supabase is not connected yet.</strong>
+          Add your Supabase Project URL and anon key to <code>js/config.js</code>,
+          then reload this page. See <code>README.md</code> → "Admin dashboard setup".
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="a-field">
+            <label for="login-email">Email address</label>
+            <input id="login-email" type="email" autocomplete="username" inputmode="email" required>
+          </div>
+          <div class="a-field">
+            <label for="login-password">Password</label>
+            <div class="password-wrap">
+              <input id="login-password" type="password" autocomplete="current-password" required>
+              <button type="button" class="password-toggle" data-toggle-password="login-password" aria-pressed="false">
+                <span>Show</span><span class="sr-only"> password</span>
+              </button>
+            </div>
+          </div>
+          <div class="notice notice-error" id="login-error" role="alert" hidden></div>
+          <button type="submit" class="btn btn-dark btn-block" id="login-btn">
+            <span class="spinner" aria-hidden="true" hidden></span><span class="label">Sign in</span>
+          </button>
+          <button type="button" class="link-btn" id="forgot-link">Forgot password?</button>
+        </form>
+      </section>
+
+      <!-- Forgot password -->
+      <section id="forgot-box" class="auth-box" hidden>
+        <p class="eyebrow">Password reset</p>
+        <h1>Forgot password</h1>
+        <p class="auth-muted">Enter your admin email. If it belongs to an admin account, we'll send a link to set a new password.</p>
+        <form id="forgot-form" novalidate>
+          <div class="a-field">
+            <label for="forgot-email">Email address</label>
+            <input id="forgot-email" type="email" autocomplete="username" inputmode="email" required>
+          </div>
+          <div class="notice" id="forgot-msg" role="status" hidden></div>
+          <button type="submit" class="btn btn-dark btn-block" id="forgot-btn">
+            <span class="spinner" aria-hidden="true" hidden></span><span class="label">Send reset link</span>
+          </button>
+          <button type="button" class="link-btn" id="back-to-login">← Back to sign in</button>
+        </form>
+      </section>
+
+      <!-- Set a new password (after clicking the email link) -->
+      <section id="newpass-box" class="auth-box" hidden>
+        <p class="eyebrow">Password reset</p>
+        <h1>Set a new password</h1>
+        <p class="auth-muted">Choose a new password of at least 10 characters.</p>
+        <form id="newpass-form" novalidate>
+          <div class="a-field">
+            <label for="newpass-1">New password</label>
+            <div class="password-wrap">
+              <input id="newpass-1" type="password" autocomplete="new-password" minlength="10" required>
+              <button type="button" class="password-toggle" data-toggle-password="newpass-1" aria-pressed="false"><span>Show</span><span class="sr-only"> password</span></button>
+            </div>
+          </div>
+          <div class="a-field">
+            <label for="newpass-2">Confirm new password</label>
+            <input id="newpass-2" type="password" autocomplete="new-password" minlength="10" required>
+          </div>
+          <div class="notice notice-error" id="newpass-msg" role="alert" hidden></div>
+          <button type="submit" class="btn btn-dark btn-block" id="newpass-btn">
+            <span class="spinner" aria-hidden="true" hidden></span><span class="label">Save new password</span>
+          </button>
+        </form>
+      </section>
+
+      <p class="auth-foot"><a href="index.html">← Back to the website</a></p>
+    </div>
+  </main>
+
+  <!-- =================================================================
+       DASHBOARD (only shown to a signed-in, approved admin)
+       ================================================================= -->
+  <div id="app-view" class="app" hidden>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo"><img src="images/logo.png" alt="GM Scrapmetal Limited" width="1533" height="628"></a>
+        <button type="button" class="sidebar-close" id="sidebar-close"><span class="sr-only">Close menu</span>✕</button>
+      </div>
+      <nav aria-label="Admin">
+        <a href="#overview" data-route="overview">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+        <a href="#gallery" data-route="gallery">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Gallery</a>
+        <a href="#supplier" data-route="supplier">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>Supplier Enquiries<span class="nav-badge" data-badge="supplier" hidden></span></a>
+        <a href="#buyer" data-route="buyer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>Buyer Enquiries<span class="nav-badge" data-badge="buyer" hidden></span></a>
+        <a href="#contact" data-route="contact">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 6 9-6"/></svg>Messages<span class="nav-badge" data-badge="contact" hidden></span></a>
+        <a href="#settings" data-route="settings">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>Website Settings</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a href="index.html" target="_blank" rel="noopener">View website ↗</a>
+        <p class="sidebar-user" id="admin-email"></p>
+        <button type="button" class="btn btn-outline-light btn-sm btn-block" id="logout-btn">Log out</button>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+    <div class="app-main">
+      <header class="topbar">
+        <button type="button" class="menu-btn" id="menu-btn" aria-controls="sidebar" aria-expanded="false">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="sr-only">Open menu</span>
+        </button>
+        <h1 id="page-title">Overview</h1>
+      </header>
+
+      <!-- Global message bar -->
+      <div class="toast" id="toast" role="status" hidden></div>
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="page" data-page="overview" hidden>
+        <div class="stat-cards">
+          <a class="stat-card" href="#gallery"><span class="stat-card-num" data-stat="published">–</span><span>Published photos</span></a>
+          <a class="stat-card" href="#gallery"><span class="stat-card-num" data-stat="hidden">–</span><span>Hidden photos</span></a>
+          <a class="stat-card" href="#supplier"><span class="stat-card-num" data-stat="supplier">–</span><span>New supplier enquiries</span></a>
+          <a class="stat-card" href="#buyer"><span class="stat-card-num" data-stat="buyer">–</span><span>New buyer enquiries</span></a>
+          <a class="stat-card" href="#contact"><span class="stat-card-num" data-stat="contact">–</span><span>New messages</span></a>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Latest enquiries</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Received</th><th>Type</th><th>Name</th><th>Summary</th><th>Status</th><th><span class="sr-only">Open</span></th></tr></thead>
+              <tbody id="recent-rows"></tbody>
+            </table>
+          </div>
+          <p class="empty-note" id="recent-empty" hidden>No enquiries yet. They will appear here when visitors send the website forms.</p>
+        </div>
+        <div class="quick-actions">
+          <a href="#gallery" class="btn btn-dark" data-open-upload>Add photos</a>
+          <a href="#settings" class="btn btn-outline">Edit contact details</a>
+        </div>
+      </section>
+
+      <!-- ===== GALLERY ===== -->
+      <section class="page" data-page="gallery" hidden>
+        <div class="toolbar">
+          <button type="button" class="btn btn-dark" id="add-photos-btn">+ Add Photos</button>
+          <input type="search" id="gallery-search" placeholder="Search titles and captions" aria-label="Search photos">
+          <select id="gallery-cat" aria-label="Filter by category"><option value="">All categories</option></select>
+          <select id="gallery-status" aria-label="Filter by status">
+            <option value="">Published &amp; hidden</option>
+            <option value="published">Published only</option>
+            <option value="hidden">Hidden only</option>
+          </select>
+        </div>
+
+        <!-- Upload panel -->
+        <div class="panel upload-panel" id="upload-panel" hidden>
+          <div class="panel-head">
+            <h2>Add photos</h2>
+            <button type="button" class="link-btn" id="upload-cancel">Close</button>
+          </div>
+          <p class="panel-note">JPG, JPEG, PNG or WebP, up to 15 MB each (they are resized to 1600&nbsp;px before upload). Please upload only genuine photographs of GM Scrapmetal work.</p>
+
+          <label class="dropzone" id="dropzone" for="upload-files">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            <strong>Choose photos</strong>
+            <span>or drag and drop them here. You can select several at once.</span>
+            <input id="upload-files" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple class="sr-only">
+          </label>
+          <div class="notice notice-error" id="upload-file-errors" role="alert" hidden></div>
+
+          <ul class="preview-grid" id="preview-grid"></ul>
+
+          <div class="upload-shared" id="upload-shared" hidden>
+            <div class="a-field">
+              <label for="upload-category">Category <span class="req">*</span></label>
+              <select id="upload-category"></select>
+            </div>
+            <div class="a-field">
+              <label for="upload-date">Project date <span class="opt">(optional)</span></label>
+              <input id="upload-date" type="date">
+            </div>
+            <label class="check">
+              <input type="checkbox" id="upload-published" checked> Publish on the website straight away
+            </label>
+          </div>
+
+          <div class="progress" id="upload-progress" hidden>
+            <div class="progress-bar"><span id="upload-bar"></span></div>
+            <p id="upload-progress-text" role="status"></p>
+          </div>
+
+          <div class="panel-actions" id="upload-actions" hidden>
+            <button type="button" class="btn btn-dark" id="upload-btn">Upload photos</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Photos <span class="muted" id="photo-count"></span></h2>
+            <p class="panel-note" id="reorder-hint">Use ↑ ↓ to change the order. The first photo is shown first on the website.</p>
+          </div>
+          <div class="loading-row" id="photos-loading"><span class="spinner spinner-dark"></span> Loading photos…</div>
+          <ul class="photo-grid" id="photo-grid"></ul>
+          <div class="empty-note" id="photos-empty" hidden>No photos yet. Click <strong>+ Add Photos</strong> to upload your first photographs.</div>
+          <div class="empty-note" id="photos-nomatch" hidden>No photos match your search or filters.</div>
+        </div>
+      </section>
+
+      <!-- ===== ENQUIRIES (supplier / buyer / messages share this) ===== -->
+      <section class="page" data-page="enquiries" hidden>
+        <div class="toolbar">
+          <input type="search" id="enq-search" placeholder="Search name, company, phone, email" aria-label="Search enquiries">
+          <select id="enq-status" aria-label="Filter by status">
+            <option value="">All statuses</option>
+            <option>New</option><option>Contacted</option><option>In Discussion</option><option>Completed</option><option>Archived</option>
+          </select>
+        </div>
+        <div class="panel">
+          <div class="loading-row" id="enq-loading"><span class="spinner spinner-dark"></span> Loading…</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Received</th><th>Name</th><th>Phone</th><th>Summary</th><th>Status</th><th><span class="sr-only">Open</span></th></tr></thead>
+              <tbody id="enq-rows"></tbody>
+            </table>
+          </div>
+          <p class="empty-note" id="enq-empty" hidden>Nothing here yet.</p>
+          <div class="pager">
+            <button type="button" class="btn btn-outline btn-sm" id="enq-prev">← Previous</button>
+            <span id="enq-page-info"></span>
+            <button type="button" class="btn btn-outline btn-sm" id="enq-next">Next →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== WEBSITE SETTINGS ===== -->
+      <section class="page" data-page="settings" hidden>
+        <form class="panel settings-form" id="settings-form" novalidate>
+          <div class="panel-head"><h2>Contact details on the website</h2></div>
+          <p class="panel-note">These appear in the footer of every page and on the Contact page. Changes go live as soon as you save. Leave a field empty to show "To be confirmed".</p>
+          <div class="form-grid">
+            <div class="a-field"><label for="set-phone1">Phone number 1</label><input id="set-phone1" type="tel" placeholder="+255 6XX XXX XXX"></div>
+            <div class="a-field"><label for="set-phone2">Phone number 2</label><input id="set-phone2" type="tel" placeholder="+255 6XX XXX XXX"></div>
+            <div class="a-field"><label for="set-whatsapp">WhatsApp number</label><input id="set-whatsapp" type="tel" placeholder="+255 7XX XXX XXX">
+              <p class="hint">International format. Website forms open WhatsApp to this number.</p></div>
+            <div class="a-field"><label for="set-email">Email</label><input id="set-email" type="email"></div>
+            <div class="a-field span-2"><label for="set-address">Physical address</label><input id="set-address" type="text" maxlength="200"></div>
+            <div class="a-field span-2"><label for="set-hours">Business hours</label><input id="set-hours" type="text" maxlength="120" placeholder="e.g. Mon–Sat, 8:00–17:00"></div>
+            <div class="a-field span-2"><label for="set-map">Google Maps embed link</label><input id="set-map" type="url" placeholder="https://www.google.com/maps?q=...&amp;output=embed">
+              <p class="hint">Must start with https://www.google.com/maps. Leave empty to hide the map.</p></div>
+          </div>
+          <div class="notice notice-error" id="settings-error" role="alert" hidden></div>
+          <div class="panel-actions">
+            <button type="submit" class="btn btn-dark" id="settings-btn">Save settings</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       DIALOGS
+       ================================================================= -->
+  <!-- Edit photo -->
+  <dialog class="modal" id="edit-dialog" aria-labelledby="edit-title">
+    <form method="dialog" id="edit-form" class="modal-body" novalidate>
+      <div class="modal-head"><h2 id="edit-title">Edit photo</h2><button type="button" class="modal-x" data-close>✕<span class="sr-only"> Close</span></button></div>
+      <img id="edit-preview" alt="" class="edit-preview">
+      <div class="a-field"><label for="edit-title-input">Title</label><input id="edit-title-input" type="text" maxlength="160"></div>
+      <div class="a-field"><label for="edit-caption">Caption</label><textarea id="edit-caption" rows="3" maxlength="500"></textarea></div>
+      <div class="a-field"><label for="edit-alt">Photo description <span class="opt">(for screen readers)</span></label><input id="edit-alt" type="text" maxlength="300"></div>
+      <div class="form-grid">
+        <div class="a-field"><label for="edit-category">Category</label><select id="edit-category"></select></div>
+        <div class="a-field"><label for="edit-date">Project date</label><input id="edit-date" type="date"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="edit-published"> Published on the website</label>
+      <div class="notice notice-error" id="edit-error" role="alert" hidden></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close>Cancel</button>
+        <button type="submit" class="btn btn-dark" id="edit-save">Save changes</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Confirm (used for deleting) -->
+  <dialog class="modal modal-sm" id="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="modal-body">
+      <h2 id="confirm-title">Are you sure?</h2>
+      <p id="confirm-text"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="confirm-no">Cancel</button>
+        <button type="button" class="btn btn-danger-solid" id="confirm-yes">Delete</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Enquiry details -->
+  <dialog class="modal" id="enq-dialog" aria-labelledby="enq-title">
+    <div class="modal-body">
+      <div class="modal-head"><h2 id="enq-title">Enquiry</h2><button type="button" class="modal-x" data-close>✕<span class="sr-only"> Close</span></button></div>
+      <p class="muted" id="enq-received"></p>
+      <div class="contact-actions" id="enq-contact"></div>
+      <dl class="detail-list" id="enq-details"></dl>
+      <div class="form-grid">
+        <div class="a-field"><label for="enq-status-select">Status</label>
+          <select id="enq-status-select"><option>New</option><option>Contacted</option><option>In Discussion</option><option>Completed</option><option>Archived</option></select></div>
+      </div>
+      <div class="a-field"><label for="enq-notes">Internal notes <span class="opt">(only admins see these)</span></label><textarea id="enq-notes" rows="3" maxlength="4000"></textarea></div>
+      <div class="notice notice-error" id="enq-error" role="alert" hidden></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-danger" id="enq-delete">Delete</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-outline" data-close>Close</button>
+        <button type="button" class="btn btn-dark" id="enq-save">Save</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Supabase library (secure login, database and image storage) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Work | GM Scrapmetal Limited</title>
+  <meta name="description" content="Photographs of GM Scrapmetal Limited's operations, material handling, stock, and equipment.">
+  <meta name="theme-color" content="#1B2028">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="GM Scrapmetal Limited, home">
+        <img src="images/logo.png" alt="GM Scrapmetal Limited" width="1533" height="628">
+      </a>
+      <nav class="main-nav" aria-label="Main">
+        <ul>
+          <li><a href="what-we-buy.html">What We Buy</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Our Work</a></li>
+          <li><a href="industrial-buyers.html">Industrial Buyers</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="sell-your-scrap.html" class="btn btn-primary btn-sm header-cta">Sell Your Scrap</a>
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="sr-only">Open menu</span>
+          <svg class="icon icon-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="what-we-buy.html">What We Buy</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Our Work</a></li>
+          <li><a href="industrial-buyers.html">Industrial Buyers</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="sell-your-scrap.html" class="btn btn-primary btn-block">Sell Your Scrap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <img class="page-hero-bg" src="images/stock/mixed-scrap-aerial.jpg" alt="">
+      <div class="container">
+        <p class="eyebrow">Our work</p>
+        <h1>Gallery</h1>
+        <p class="intro">Photographs from our operations: material handling, stock, equipment, and completed work.</p>
+      </div>
+    </section>
+
+    <!-- The photos are listed in js/config.js (the "gallery" list). -->
+    <section class="section">
+      <div class="container" data-gallery>
+        <div class="filters" role="group" aria-label="Filter photos by category" hidden></div>
+        <ul class="gallery-grid"></ul>
+        <div class="empty-state">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>
+          <h2>Photographs coming soon</h2>
+          <p>We are preparing photographs of our projects, material handling, and stock. Please check back soon, or contact our team directly with any questions.</p>
+          <div class="btn-row"><a href="contact.html" class="btn btn-dark">Contact Our Team <svg class="icon arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox: shows a photo enlarged when clicked -->
+  <dialog class="lightbox" id="lightbox" aria-label="Photo">
+    <div class="lightbox-inner">
+      <img src="" alt="">
+      <p class="lightbox-caption"></p>
+      <p class="lightbox-meta"></p>
+      <button type="button" class="lightbox-btn lightbox-close"><span class="sr-only">Close</span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <button type="button" class="lightbox-btn lightbox-prev"><span class="sr-only">Previous photo</span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button type="button" class="lightbox-btn lightbox-next"><span class="sr-only">Next photo</span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+    </div>
+  </dialog>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer hatch">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="GM Scrapmetal Limited" width="1533" height="628" loading="lazy"></a>
+        <p class="footer-about">Buying and trading scrap metal in Dar es Salaam, Tanzania. Working with suppliers, businesses, and industrial buyers on clear, agreed terms.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="footer-title">Explore</h2>
+        <ul class="footer-links">
+          <li><a href="sell-your-scrap.html">Sell Your Scrap</a></li>
+          <li><a href="what-we-buy.html">What We Buy</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Our Work</a></li>
+          <li><a href="industrial-buyers.html">Industrial Buyers</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-title">Contact</h2>
+        <ul class="footer-contact">
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+            <div><small>Phone</small><span data-field="phones"></span></div></li>
+          <li><svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.82.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.82Zm4.5-6.14c-.25-.12-1.47-.72-1.7-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.22 7.4 7.4 0 0 1-1.37-1.7c-.14-.25 0-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.07 4.85 4.85 0 0 0 1.02 2.57 11.1 11.1 0 0 0 4.25 3.76c.6.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.1-.23-.17-.48-.29Z"/></svg>
+            <div><small>WhatsApp</small><a data-field="whatsapp"></a></div></li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 6 9-6"/></svg>
+            <div><small>Email</small><a data-field="email"></a></div></li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <div><small>Location</small><span data-field="address"></span></div></li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><small>Business hours</small><span data-field="businessHours"></span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© <span data-year></span> GM Scrapmetal Limited. All rights reserved.</p>
+        <nav aria-label="Legal"><a href="privacy.html">Privacy</a><a href="about.html#image-credits">Image credits</a><a href="admin.html" rel="nofollow">Staff login</a></nav>
+        <p class="designer-credit"><span class="designer-mark" aria-hidden="true">GK</span>Designed by <strong>Glory Kiwelu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp button (on every page) -->
+  <a class="whatsapp-float" data-whatsapp="general">
+    <svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.82.83-3-.2-.31a8.2 8.2 0 1 1 6.97 3.82Zm4.5-6.14c-.25-.12-1.47-.72-1.7-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.22 7.4 7.4 0 0 1-1.37-1.7c-.14-.25 0-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48a.92.92 0 0 0-.66.31 2.8 2.8 0 0 0-.87 2.07 4.85 4.85 0 0 0 1.02 2.57 11.1 11.1 0 0 0 4.25 3.76c.6.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.1-.23-.17-.48-.29Z"/></svg>
+    <span class="label">WhatsApp us</span>
+    <span class="sr-only">Chat with us on WhatsApp (opens in a new tab)</span>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
